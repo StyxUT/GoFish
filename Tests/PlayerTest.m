@@ -126,32 +126,15 @@
     STAssertTrue(suitCount == 1, [NSString stringWithFormat:@"There should have been 1 ClownFish in the player's hand, but %i were found", suitCount]);
 }
 
--(void)testDrawCardFromDeck
+-(void)testFishFor
 {
-    /*
-     Card *c = [self.game drawCardFromDeck];
-     
-     if([c isKindOfClass:[Card class]])
-     {
-     [hand addObject:c];
-     self.status = [NSMutableString stringWithFormat:@" drew a %@ from the game deck", [c suitName]];
-     [self checkForFullSuit:c.suitID];
-     }
-     else
-     {
-     self.status = [NSMutableString stringWithFormat:@" cannot draw a card because the deck is out of cards"];
-     }
-     
-     [self writePlayerStatus];
-     [self verifyHand];
-     */
+    NSInteger suitCount = [player0 fishFor:FlyingFish];
     
-    Card *c = [[Card alloc] initWithSuit:FlyingFish];
-    [player0.hand addObject:c];
-    STAssertEqualObjects([player0.hand lastObject], c, @"The card added to the player's hand was NOT the card drawn from the game deck");
-    
+    STAssertTrue(suitCount == 4, [NSString stringWithFormat:@"fishFor returned that there were %i FlyingFish in the deck but should have returned that there were 4", suitCount]);
+                                  
+    suitCount = [player0 fishFor:FlyingFish];
+    STAssertTrue(suitCount == NULL, [NSString stringWithFormat:@"fishFor returned that there were %i FlyingFish in the deck but should have returned nil", suitCount]);
 }
-
 
 -(void)tearDown
 {
